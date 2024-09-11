@@ -45,22 +45,22 @@
       </section>
 
       <!-- Experience Section -->
-      <section id="experience" class="py-20">
-        <h2 class="text-3xl font-bold mb-6 text-center">Experience</h2>
-        <div class="space-y-6">
-          <div v-for="(job, index) in experience" :key="index" 
-               class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg flex items-start hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-            <div class="w-16 h-16 mr-6 flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
-              <img :src="require(`@/assets/icons/${job.logo}`)" :alt="`${job.company} logo`" class="w-full h-full object-cover rounded-full" />
-            </div>
-            <div>
-              <h3 class="text-xl font-semibold">{{ job.title }} at {{ job.company }}</h3>
-              <p class="text-gray-600 dark:text-gray-400">{{ job.period }}</p>
-              <p class="mt-2">{{ job.description }}</p>
-            </div>
+    <section id="experience" class="py-20">
+      <h2 class="text-3xl font-bold mb-6 text-center">Experience</h2>
+      <div class="space-y-6">
+        <div v-for="(job, index) in experience" :key="index" 
+            class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg flex items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+          <div class="w-16 h-16 mr-6 flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+            <img :src="require(`@/assets/icons/${job.logo}`)" :alt="`${job.company} logo`" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">{{ job.title }} at {{ job.company }}</h3>
+            <p class="text-gray-600 dark:text-gray-400">{{ job.period }}</p>
+            <p class="mt-2">{{ job.description }}</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       <!-- Work Section -->
       <section id="work" class="py-20">
@@ -142,7 +142,7 @@ const isDarkMode = ref(localStorage.getItem('isDarkMode') === 'true' || localSto
 const displayedName = ref('')
 const displayedDescription = ref('')
 const fullName = "Hi! I'm Jeremy."
-const fullDescription = "Full-Stack Developer & UI/UX Enthusiast"
+const fullDescription = "Software Engineer & Data Analyst"
 
 const toggleDarkMode = () => {
   isDarkMode.value = !isDarkMode.value
@@ -197,7 +197,7 @@ const experience = [
     company: 'Shopee',
     period: 'May 2024 - Aug 2024',
     description: 'Developed responsive websites and web applications for various clients using modern JavaScript frameworks and backend technologies.',
-    logo: 'shopee-icon.webp'
+    logo: 'shopee-logo.png'
   }
 ]
 
