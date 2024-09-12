@@ -1,17 +1,17 @@
 <template>
-  <div :class="{ 'dark': isDarkMode }" class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 text-gray-900 dark:text-gray-100 transition-all duration-500">
+  <div :class="{ 'dark': isDarkMode }" class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 text-gray-900 dark:text-gray-100 transition-all duration-200">
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg z-50 transition-all duration-300">
+    <nav class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg z-50 transition-all duration-200">
       <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <a href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">jerheng.com</a>
-        <div class="flex items-center space-x-6">
+        <a ref="navbarLeft" href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">jerheng.com</a>
+        <div  ref="navbarRight" class="flex items-center space-x-6">
           <a v-for="section in sections" :key="section.id" :href="`#${section.id}`" 
-             class="hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 py-2 px-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 relative group">
+             class="hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 relative group">
             {{ section.title }}
-            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
           </a>
           <button @click="toggleDarkMode" 
-                  class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
+                  class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                   :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
             <SunIcon v-if="isDarkMode" class="h-5 w-5" />
             <MoonIcon v-else class="h-5 w-5" />
@@ -27,19 +27,23 @@
         <h1 class="text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">{{ displayedName }}</h1>
         <p class="text-2xl mb-8">{{ fullDescription }}</p>
         <div class="flex justify-center space-x-4">
-          <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105">Get in Touch</a>
-          <a href="#work" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105">View My Work</a>
+          <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full transition-all duration-200 transform hover:scale-105">Get in Touch</a>
+          <a href="#work" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-full transition-all duration-200 transform hover:scale-105">View My Work</a>
         </div>
       </section>
 
       <!-- About Me Section -->
       <section id="about" class="py-20">
         <h2 class="text-3xl font-bold mb-6 text-center">About Me</h2>
-        <div class="max-w-3xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-lg shadow-lg">
-          <p class="text-lg leading-relaxed">
-            Hello! I'm a passionate full-stack developer with a keen eye for design and a love for creating seamless user experiences. 
+        <div class="max-w-4xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-lg shadow-lg">
+          <p class="text-lg text-justify leading-relaxed">
+            <!-- Hello! I'm a passionate full-stack developer with a keen eye for design and a love for creating seamless user experiences. 
             With expertise in Vue.js, React, Node.js, and modern web technologies, I bring ideas to life through code.
-            I believe in the power of technology to solve real-world problems and am constantly learning to stay at the forefront of web development.
+            I believe in the power of technology to solve real-world problems and am constantly learning to stay at the forefront of web development. -->
+            Hello! I'm an aspiring software engineer, with a keen interest in the intersection of technology and finance. I'm especially interested
+            in how we can apply <span class="font-bold text-blue-600 dark:text-blue-400">technology</span> and <span class="font-bold text-blue-600 dark:text-blue-400">data</span> to the financial markets in the high impact environment. At other times, you'll find me highly caffeinated
+            hopping by new cafes, or brewing some new <span class="font-bold text-blue-600 dark:text-blue-400">coffee</span> at home! I beleive in the power of technology to <span class="font-bold text-blue-600 dark:text-blue-400">solve real-world problems</span> and am
+            constantly trying to improve my skillsets, staying at the forefront of engineering today.
           </p>
         </div>
       </section>
@@ -49,7 +53,7 @@
       <h2 class="text-3xl font-bold mb-6 text-center">Experience</h2>
       <div class="space-y-6">
         <div v-for="(job, index) in experience" :key="index" 
-            class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg flex items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg flex items-center hover:shadow-xl transition-all duration-200 transform hover:scale-105">
           <div class="w-16 h-16 mr-6 flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
             <img :src="require(`@/assets/img/${job.logo}`)" :alt="`${job.company} logo`" class="w-full h-full object-cover rounded-full" />
           </div>
@@ -67,12 +71,12 @@
   <h2 class="text-3xl font-bold mb-6 text-center">Work</h2>
   <div :class="`grid gap-8 ${projects.length === 1 ? 'grid-cols-1 justify-items-center' : projects.length === 2 ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-items-center' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`">
     <div v-for="project in projects" :key="project.id" 
-         class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl group w-full">
+         class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg transition-all duration-200 hover:shadow-2xl group w-full">
       <div class="relative overflow-hidden">
-        <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <img :src="require(`@/assets/img/${project.image}`)" :alt="project.title" class="w-full h-48 object-cover transition-transform duration-200 group-hover:scale-110" />
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <a :href="project.link" target="_blank" rel="noopener noreferrer" 
-             class="bg-white text-gray-900 px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-300">
+             class="bg-white text-gray-900 px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200">
             View Project
           </a>
         </div>
@@ -91,7 +95,7 @@
         <h2 class="text-3xl font-bold mb-6 text-center">Skills</h2>
         <div class="flex flex-wrap justify-center gap-4">
           <div v-for="skill in skills" :key="skill" 
-               class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+               class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105">
             {{ skill }}
           </div>
         </div>
@@ -102,9 +106,10 @@
         <h2 class="text-3xl font-bold mb-6 text-center">Contact</h2>
         <div class="max-w-md mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-lg shadow-lg">
           <p class="text-lg mb-6 text-center">
-            I'm always open to new opportunities and collaborations. Feel free to reach out!
+            <!-- I'm always open to new opportunities and collaborations. Feel free to reach out! -->
+             I'm always open to new work opportunities and collaborations. Feel free to reach out to me at <a href="mailto:contact@jerheng.com" class="font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">contact@jerheng.com</a>!
           </p>
-          <form @submit.prevent="submitForm" class="space-y-4">
+          <!-- <form @submit.prevent="submitForm" class="space-y-4">
             <input v-model="form.name" type="text" placeholder="Your Name" required
                    class="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             <input v-model="form.email" type="email" placeholder="Your Email" required
@@ -112,10 +117,10 @@
             <textarea v-model="form.message" placeholder="Your Message" required rows="4"
                       class="w-full px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
             <button type="submit" 
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-300">
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors duration-200">
               Send Message
             </button>
-          </form>
+          </form> -->
         </div>
       </section>
     </main>
@@ -123,11 +128,11 @@
     <!-- Floating Social Icons -->
     <div class="fixed bottom-6 right-6 flex space-x-4">
       <a href="https://linkedin.com/in/jerheng" target="_blank" rel="noopener noreferrer" 
-         class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+         class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200">
         <LinkedinIcon class="h-6 w-6 text-blue-600 dark:text-blue-400" />
       </a>
       <a href="https://github.com/jerheng" target="_blank" rel="noopener noreferrer" 
-         class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+         class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200">
         <GithubIcon class="h-6 w-6 text-gray-800 dark:text-gray-200" />
       </a>
     </div>
@@ -174,6 +179,8 @@ onMounted(() => {
   typeWriterEffect(fullDescription, 0, (text) => {
     displayedDescription.value = text
   })
+  checkNavbarFit()
+  window.addEventListener('resize', checkNavbarFit)
 })
 
 const sections = [
@@ -206,15 +213,15 @@ const projects = [
     id: 1,
     title: 'Spotify Utility',
     description: 'Spotify CLI and Streamlit Utility for downloading songs and merging playlists',
-    image: '/placeholder.svg?height=300&width=400',
-    link: '#'
+    image: 'albumUsage.gif',
+    link: 'https://github.com/jerheng/Spotify-Utility'
   },
   {
     id: 2,
     title: 'LOA Helper',
     description: 'A discord bot to assist with raid scheduling in different threads',
-    image: '/placeholder.svg?height=300&width=400',
-    link: '#'
+    image: 'loa-helper.png',
+    link: 'https://github.com/jerheng/loa-helper'
   }
   // {
   //   id: 3,
@@ -231,17 +238,36 @@ const skills = [
   'Sass', 'Tailwind CSS', 'Git', 'Docker', 'AWS', 'CI/CD'
 ]
 
-const form = ref({
-  name: '',
-  email: '',
-  message: ''
-})
+// const form = ref({
+//   name: '',
+//   email: '',
+//   message: ''
+// })
 
-const submitForm = () => {
-  console.log('Form submitted:', form.value)
-  form.value = { name: '', email: '', message: '' }
-  alert('Thank you for your message! I will get back to you soon.')
+// const submitForm = () => {
+//   console.log('Form submitted:', form.value)
+//   form.value = { name: '', email: '', message: '' }
+//   alert('Thank you for your message! I will get back to you soon.')
+// }
+
+const navbarLeft = ref(null)
+const navbarRight = ref(null)
+
+const checkNavbarFit = () => {
+  const navbarLeftElement = navbarLeft.value.offsetWidth
+  const navbarRightElement = navbarRight.value
+
+  if (navbarRightElement) {
+    const navbarWidth = navbarRightElement.parentElement.clientWidth
+    const rightWidth = navbarRightElement.scrollWidth
+    if ((rightWidth + navbarLeftElement) > navbarWidth) {
+      navbarRightElement.style.display = 'none'
+    } else {
+      navbarRightElement.style.display = 'flex'
+    }
+  }
 }
+
 </script>
 
 <style>
