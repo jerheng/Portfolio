@@ -51,7 +51,7 @@
         <div v-for="(job, index) in experience" :key="index" 
             class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg flex items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105">
           <div class="w-16 h-16 mr-6 flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
-            <img :src="require(`@/assets/icons/${job.logo}`)" :alt="`${job.company} logo`" class="w-full h-full object-cover rounded-full" />
+            <img :src="require(`@/assets/img/${job.logo}`)" :alt="`${job.company} logo`" class="w-full h-full object-cover rounded-full" />
           </div>
           <div>
             <h3 class="text-xl font-semibold">{{ job.title }} at {{ job.company }}</h3>
