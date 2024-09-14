@@ -9,7 +9,7 @@
              class="hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 relative group">
             {{ section.title }}
             <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-          </a>
+          </a>  
           <button @click="toggleDarkMode" 
                   class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                   :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
@@ -54,13 +54,20 @@
       <div class="space-y-6">
         <div v-for="(job, index) in experience" :key="index" 
             class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg flex items-center hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-          <div class="w-16 h-16 mr-6 flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
-            <img :src="require(`@/assets/img/${job.logo}`)" :alt="`${job.company} logo`" class="w-full h-full object-cover rounded-full" />
+          <!-- Div to insert the company logo at each experience -->
+          <div class="w-20 h-20 mr-6 flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+            <img :src="require(`@/assets/logos/${job.logo}`)" :alt="`${job.company} logo`" class="w-full h-full object-cover rounded-full" />
           </div>
           <div>
             <h3 class="text-xl font-semibold">{{ job.title }} at {{ job.company }}</h3>
             <p class="text-gray-600 dark:text-gray-400">{{ job.period }}</p>
             <p class="mt-2">{{ job.description }}</p>
+            <div class="flex flex-wrap mt-2">
+              <div v-for="skill in job.skills" :key="skill" class="flex items-center mr-2 mb-2">
+                <img :src="require(`@/assets/logos/${skills.find(s => s.name === skill).logo}`)" :alt="skill" class="w-8 h-8 mr-1" />
+                <span>{{ skill }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -84,6 +91,12 @@
       <div class="p-6">
         <h3 class="text-xl font-semibold mb-2">{{ project.title }}</h3>
         <p class="text-gray-600 dark:text-gray-400">{{ project.description }}</p>
+        <div class="flex flex-wrap mt-2">
+          <div v-for="skill in project.skills" :key="skill" class="flex items-center mr-2 mb-2">
+            <img :src="require(`@/assets/logos/${skills.find(s => s.name === skill).logo}`)" :alt="skill" class="w-8 h-8 mr-1" />
+            <span>{{ skill }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -94,9 +107,10 @@
       <section id="skills" class="py-20">
         <h2 class="text-3xl font-bold mb-6 text-center">Skills</h2>
         <div class="flex flex-wrap justify-center gap-4">
-          <div v-for="skill in skills" :key="skill" 
-               class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105">
-            {{ skill }}
+          <div v-for="skill in skills" :key="skill.name" 
+               class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 flex items-center">
+            <img :src="require(`@/assets/logos/${skill.logo}`)" :alt="skill.name" class="w-8 h-8 mr-2" />
+            <span>{{ skill.name }}</span>
           </div>
         </div>
       </section>
@@ -129,11 +143,11 @@
     <div class="fixed bottom-6 right-6 flex space-x-4">
       <a href="https://linkedin.com/in/jerheng" target="_blank" rel="noopener noreferrer" 
          class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200">
-        <LinkedinIcon class="h-6 w-6 text-blue-600 dark:text-blue-400" />
+        <LinkedinIcon class="h-8 w-8 text-blue-600 dark:text-blue-400" />
       </a>
       <a href="https://github.com/jerheng" target="_blank" rel="noopener noreferrer" 
          class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-200">
-        <GithubIcon class="h-6 w-6 text-gray-800 dark:text-gray-200" />
+        <GithubIcon class="h-8 w-8 text-gray-800 dark:text-gray-200" />
       </a>
     </div>
   </div>
@@ -191,37 +205,51 @@ const sections = [
   { id: 'contact', title: 'Contact' }
 ]
 
+// To add in skills here for each experience as well
 const experience = [
   {
     title: 'Data Analyst Intern',
     company: 'Temasek',
     period: 'Aug 2024 - Present',
     description: 'Lead the development team, implementing cutting-edge web applications using Vue.js, React, and Node.js.',
-    logo: 'temasek-international.jpg'
+    logo: 'temasek-international.jpg',
+    skills: ['Excel', 'PostgreSQL']
   },
   {
     title: 'Business Analyst Intern',
     company: 'Shopee',
     period: 'May 2024 - Aug 2024',
     description: 'Developed responsive websites and web applications for various clients using modern JavaScript frameworks and backend technologies.',
-    logo: 'shopee-logo.png'
+    logo: 'shopee-logo.png',
+    skills: ['Python', 'Excel', 'Spark', 'Trino']
   }
 ]
 
+// Add in skills used here as well
 const projects = [
   {
     id: 1,
     title: 'Spotify Utility',
     description: 'Spotify CLI and Streamlit Utility for downloading songs and merging playlists',
     image: 'albumUsage.gif',
-    link: 'https://github.com/jerheng/Spotify-Utility'
+    link: 'https://github.com/jerheng/Spotify-Utility',
+    skills: ['Python', 'Streamlit']
   },
   {
     id: 2,
     title: 'LOA Helper',
     description: 'A discord bot to assist with raid scheduling in different threads',
     image: 'loa-helper.png',
-    link: 'https://github.com/jerheng/loa-helper'
+    link: 'https://github.com/jerheng/loa-helper',
+    skills: ['Python']
+  },
+  {
+    id: 3,
+    title: "Buzzboard",
+    description: "Setup backend for Buzzboard, a internal corporate platform for users to view their company's performance for recycling",
+    image: 'getbuzz-logo.png',
+    link: 'https://github.com/bfe-ta/BuzzboardServer',
+    skills: ['Node.js', 'Express.js', 'PostgreSQL', 'JWT']
   }
   // {
   //   id: 3,
@@ -232,12 +260,34 @@ const projects = [
   // }
 ]
 
+// To add a logo for each skill to then map 
 const skills = [
-  'JavaScript', 'TypeScript', 'Vue.js', 'React', 'Node.js', 'Express.js', 
-  'MongoDB', 'PostgreSQL', 'GraphQL', 'REST APIs', 'HTML5', 'CSS3', 
-  'Sass', 'Tailwind CSS', 'Git', 'Docker', 'AWS', 'CI/CD'
-]
+  { name: 'JavaScript', logo: 'javascript-logo.png' },
+  // { name: 'TypeScript', logo: 'typescript-logo.png' },
+  { name: 'Vue.js', logo: 'vue-logo.png' },
+  { name: 'React', logo: 'react-logo.png' },
+  { name: 'Node.js', logo: 'nodejs-logo.png' },
+  { name: 'Express.js', logo: 'express-logo.png' },
+  { name: 'MongoDB', logo: 'mongodb-logo.png' },
+  { name: 'PostgreSQL', logo: 'postgresql-logo.png' },
+  // { name: 'GraphQL', logo: 'graphql-logo.png' },
+  { name: 'HTML5', logo: 'html5-logo.png' },
+  { name: 'CSS3', logo: 'css3-logo.png' },
+  { name: 'Sass', logo: 'sass-logo.png' },
+  { name: 'Tailwind CSS', logo: 'tailwindcss-logo.png' },
+  { name: 'Git', logo: 'git-logo.png' },
+  { name: 'Docker', logo: 'docker-logo.png' },
+  { name: 'EC2', logo: 'ec2-logo.png' },
+  { name: 'ReDis', logo: 'redis-logo.png'},
+  { name: 'Python', logo: 'python-logo.png'},
+  { name: 'Streamlit', logo: 'streamlit-logo.png'},
+  { name: 'Excel', logo: 'excel-logo.png'},
+  { name: 'Spark', logo: 'spark-logo.png'},
+  { name: 'Trino', logo: 'trino-logo.png'},
+  { name: 'JWT', logo: 'jwt-logo.png'}
+];
 
+// Currently commented out because gh-pages is a static site
 // const form = ref({
 //   name: '',
 //   email: '',
