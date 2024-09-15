@@ -62,9 +62,9 @@
             <h3 class="text-xl font-semibold">{{ job.title }} at {{ job.company }}</h3>
             <p class="text-gray-600 dark:text-gray-400">{{ job.period }}</p>
             <p class="mt-2">{{ job.description }}</p>
-            <div class="flex flex-wrap mt-2">
-              <div v-for="skill in job.skills" :key="skill" class="flex items-center mr-2 mb-2">
-                <img :src="require(`@/assets/logos/${skills.find(s => s.name === skill).logo}`)" :alt="skill" class="w-8 h-8 mr-1" />
+            <div class="flex flex-wrap -m-1">
+              <div v-for="skill in job.skills" :key="skill" class="m-1 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 flex items-center">
+                <img :src="require(`@/assets/logos/${skills.find(s => s.name === skill).logo}`)" :alt="skill" class="w-6 h-6 mr-1"/>
                 <span>{{ skill }}</span>
               </div>
             </div>
@@ -84,16 +84,17 @@
         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <a :href="project.link" target="_blank" rel="noopener noreferrer" 
              class="bg-white text-gray-900 px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200">
-            View Project
-          </a>
+             View my Projects
+            </a>
         </div>
       </div>
       <div class="p-6">
         <h3 class="text-xl font-semibold mb-2">{{ project.title }}</h3>
         <p class="text-gray-600 dark:text-gray-400">{{ project.description }}</p>
-        <div class="flex flex-wrap mt-2">
-          <div v-for="skill in project.skills" :key="skill" class="flex items-center mr-2 mb-2">
-            <img :src="require(`@/assets/logos/${skills.find(s => s.name === skill).logo}`)" :alt="skill" class="w-8 h-8 mr-1" />
+        <!-- Enter skills here for each proj -->
+        <div class="flex flex-wrap -m-1">
+          <div v-for="skill in project.skills" :key="skill" class="m-1 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 flex items-center">
+            <img :src="require(`@/assets/logos/${skills.find(s => s.name === skill).logo}`)" :alt="skill" class="w-6 h-6 mr-1"/>
             <span>{{ skill }}</span>
           </div>
         </div>
@@ -211,7 +212,7 @@ const experience = [
     title: 'Data Analyst Intern',
     company: 'Temasek',
     period: 'Aug 2024 - Present',
-    description: 'Lead the development team, implementing cutting-edge web applications using Vue.js, React, and Node.js.',
+    description: 'Building software automation scripts to enable data driven decision making in the financial management team',
     logo: 'temasek-international.jpg',
     skills: ['Excel', 'PostgreSQL']
   },
@@ -219,7 +220,7 @@ const experience = [
     title: 'Business Analyst Intern',
     company: 'Shopee',
     period: 'May 2024 - Aug 2024',
-    description: 'Developed responsive websites and web applications for various clients using modern JavaScript frameworks and backend technologies.',
+    description: 'Wrote high-performance SQL scripts, wrote and analysed performance metrics to drive business insights and executed strategic initiatives',
     logo: 'shopee-logo.png',
     skills: ['Python', 'Excel', 'Spark', 'Trino']
   }
@@ -238,14 +239,14 @@ const projects = [
   {
     id: 2,
     title: 'LOA Helper',
-    description: 'A discord bot to assist with raid scheduling in different threads',
+    description: 'A discord bot to assist with raid scheduling in different discord channel threads',
     image: 'loa-helper.png',
     link: 'https://github.com/jerheng/loa-helper',
     skills: ['Python']
   },
   {
     id: 3,
-    title: "Buzzboard",
+    title: "GetBuzz.co",
     description: "Setup backend for Buzzboard, a internal corporate platform for users to view their company's performance for recycling",
     image: 'getbuzz-logo.png',
     link: 'https://github.com/bfe-ta/BuzzboardServer',
@@ -265,15 +266,15 @@ const skills = [
   { name: 'JavaScript', logo: 'javascript-logo.png' },
   // { name: 'TypeScript', logo: 'typescript-logo.png' },
   { name: 'Vue.js', logo: 'vue-logo.png' },
-  { name: 'React', logo: 'react-logo.png' },
+  // { name: 'React', logo: 'react-logo.png' },
   { name: 'Node.js', logo: 'nodejs-logo.png' },
   { name: 'Express.js', logo: 'express-logo.png' },
   { name: 'MongoDB', logo: 'mongodb-logo.png' },
   { name: 'PostgreSQL', logo: 'postgresql-logo.png' },
   // { name: 'GraphQL', logo: 'graphql-logo.png' },
-  { name: 'HTML5', logo: 'html5-logo.png' },
-  { name: 'CSS3', logo: 'css3-logo.png' },
-  { name: 'Sass', logo: 'sass-logo.png' },
+  // { name: 'HTML5', logo: 'html5-logo.png' },
+  // { name: 'CSS3', logo: 'css3-logo.png' },
+  // { name: 'Sass', logo: 'sass-logo.png' },
   { name: 'Tailwind CSS', logo: 'tailwindcss-logo.png' },
   { name: 'Git', logo: 'git-logo.png' },
   { name: 'Docker', logo: 'docker-logo.png' },
@@ -304,10 +305,9 @@ const navbarLeft = ref(null)
 const navbarRight = ref(null)
 
 const checkNavbarFit = () => {
-  const navbarLeftElement = navbarLeft.value.offsetWidth
-  const navbarRightElement = navbarRight.value
-
-  if (navbarRightElement) {
+  if (navbarLeft.value && navbarRight.value) {
+    const navbarLeftElement = navbarLeft.value.offsetWidth
+    const navbarRightElement = navbarRight.value
     const navbarWidth = navbarRightElement.parentElement.clientWidth
     const rightWidth = navbarRightElement.scrollWidth
     if ((rightWidth + navbarLeftElement) > navbarWidth) {
@@ -317,7 +317,6 @@ const checkNavbarFit = () => {
     }
   }
 }
-
 </script>
 
 <style>
@@ -326,7 +325,7 @@ const checkNavbarFit = () => {
 @import 'tailwindcss/utilities';
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
 }
 
 body {
