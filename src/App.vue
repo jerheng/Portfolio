@@ -251,6 +251,14 @@ const projects = [
     image: 'getbuzz-logo.png',
     link: 'https://github.com/bfe-ta/BuzzboardServer',
     skills: ['Node.js', 'Express.js', 'PostgreSQL', 'JWT']
+  },
+  {
+    id: 4,
+    title: "AutoDCF",
+    description: "A python script to automate the DCF valuation model",
+    image: 'autodcf-logo.png',
+    link: 'https://github.com/jerheng/AutoDCF',
+    skills: ['Python']
   }
   // {
   //   id: 3,
