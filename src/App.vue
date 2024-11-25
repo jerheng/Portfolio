@@ -42,7 +42,7 @@
             I believe in the power of technology to solve real-world problems and am constantly learning to stay at the forefront of web development. -->
             Hello! I'm an aspiring software engineer, with a keen interest in the intersection of technology and finance. I'm especially interested
             in how we can apply <span class="font-bold text-blue-600 dark:text-blue-400">technology</span> and <span class="font-bold text-blue-600 dark:text-blue-400">data</span> to the financial markets in the high impact environment. At other times, you'll find me highly caffeinated
-            hopping by new cafes, or brewing some new <span class="font-bold text-blue-600 dark:text-blue-400">coffee</span> at home! I beleive in the power of technology to <span class="font-bold text-blue-600 dark:text-blue-400">solve real-world problems</span> and am
+            hopping by new cafes, or brewing some new <span class="font-bold text-blue-600 dark:text-blue-400">coffee</span> at home! I believe in the power of technology to <span class="font-bold text-blue-600 dark:text-blue-400">solve real-world problems</span> and am
             constantly trying to improve my skillsets, staying at the forefront of engineering today.
           </p>
         </div>
