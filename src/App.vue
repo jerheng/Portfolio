@@ -42,7 +42,7 @@
             I believe in the power of technology to solve real-world problems and am constantly learning to stay at the forefront of web development. -->
             Hello! I'm an aspiring software engineer, with a keen interest in the intersection of technology and finance. I'm especially interested
             in how we can apply <span class="font-bold text-blue-600 dark:text-blue-400">technology</span> and <span class="font-bold text-blue-600 dark:text-blue-400">data</span> to the financial markets in the high impact environment. At other times, you'll find me highly caffeinated
-            hopping by new cafes, or brewing some new <span class="font-bold text-blue-600 dark:text-blue-400">coffee</span> at home! I believe in the power of technology to <span class="font-bold text-blue-600 dark:text-blue-400">solve real-world problems</span> and am
+            hopping by new cafes, or brewing some of my own <span class="font-bold text-blue-600 dark:text-blue-400">coffee</span> at home! I beleive in the power of technology to <span class="font-bold text-blue-600 dark:text-blue-400">solve real-world problems</span> and i'm
             constantly trying to improve my skillsets, staying at the forefront of engineering today.
           </p>
         </div>
@@ -55,13 +55,28 @@
         <div v-for="(job, index) in experience" :key="index" 
             class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-lg shadow-lg flex items-center hover:shadow-xl transition-all duration-200 transform hover:scale-105">
           <!-- Div to insert the company logo at each experience -->
+
+          <!-- TODO: Need to fix this to default and display something that exists. Current alt does not work to perform that action -->
           <div class="w-20 h-20 mr-6 flex-shrink-0 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
-            <img :src="require(`@/assets/logos/${job.logo}`)" :alt="`${job.company} logo`" class="w-full h-full object-cover rounded-full" />
+            <img 
+              :src="require(`@/assets/logos/${job.logo}`)" 
+              @error="e => e.target.src = require('@/assets/logo.png')"
+              class="w-full h-full object-cover rounded-full" 
+              :alt="job.company"
+            />
           </div>
+
           <div>
             <h3 class="text-xl font-semibold">{{ job.title }} at {{ job.company }}</h3>
             <p class="text-gray-600 dark:text-gray-400">{{ job.period }}</p>
-            <p class="mt-2">{{ job.description }}</p>
+
+            <!-- TODO: Rethink the blue and how we can better display the highlight of the team or not to highlight at all -->
+            <p class="mt-2">
+              <span class="font-bold text-blue-600 dark:text-blue-400">{{ job.team }}</span> - 
+              {{ job.description }}
+            </p>
+
+            <!-- <p class="mt-2">{{ job.description }}</p> -->
             <div class="flex flex-wrap -m-1">
               <div v-for="skill in job.skills" :key="skill" class="m-1 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 flex items-center">
                 <img :src="require(`@/assets/logos/${skills.find(s => s.name === skill).logo}`)" :alt="skill" class="w-6 h-6 mr-1"/>
@@ -80,7 +95,12 @@
     <div v-for="project in projects" :key="project.id" 
          class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg transition-all duration-200 hover:shadow-2xl group w-full">
       <div class="relative overflow-hidden">
-        <img :src="require(`@/assets/img/${project.image}`)" :alt="project.title" class="w-full h-48 object-cover transition-transform duration-200 group-hover:scale-110" />
+        <img 
+          :src="require(`@/assets/img/${project.image}`)" 
+          @error="e => e.target.src = require('@/assets/logo.png')"
+          :alt="project.title" 
+          class="w-full h-48 object-cover transition-transform duration-200 group-hover:scale-110" 
+        />
         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <a :href="project.link" target="_blank" rel="noopener noreferrer" 
              class="bg-white text-gray-900 px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition-colors duration-200">
@@ -110,7 +130,12 @@
         <div class="flex flex-wrap justify-center gap-4">
           <div v-for="skill in skills" :key="skill.name" 
                class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 flex items-center">
-            <img :src="require(`@/assets/logos/${skill.logo}`)" :alt="skill.name" class="w-8 h-8 mr-2" />
+            <img 
+              :src="require(`@/assets/logos/${skill.logo}`)" 
+              @error="e => e.target.src = require('@/assets/logo.png')"
+              :alt="skill.name" 
+              class="w-8 h-8 mr-2" 
+            />
             <span>{{ skill.name }}</span>
           </div>
         </div>
@@ -208,11 +233,23 @@ const sections = [
 
 // To add in skills here for each experience as well
 const experience = [
+{
+    title: 'Software Engineer Intern',
+    company: 'GIC',
+    period: 'Jan 2025 - Present',
+    team: 'Total Portfolio Solutions',
+    // description: 'Trying my best',
+    description: 'Developing a data framework for portfolio strategies, computing commodities time-series data for futures and forwards to backtest new strategies',
+    // description: 'Working on an inhouse equity risk monitor, cross-asset data and signal detection and backtesting strategies on general commodities',
+    logo: 'gic-logo.png',
+    skills: ['Python', 'Vue.js', 'Springboot']
+  },
   {
     title: 'Data Analyst Intern',
     company: 'Temasek',
-    period: 'Aug 2024 - Present',
-    description: 'Building software automation scripts to enable data driven decision making in the financial management team',
+    period: 'Aug 2024 - Dec 2024',
+    team: 'Financial Management',
+    description: 'Building software automation scripts to enable data driven decision making',
     logo: 'temasek-international.jpg',
     skills: ['Excel', 'PostgreSQL']
   },
@@ -220,6 +257,7 @@ const experience = [
     title: 'Business Analyst Intern',
     company: 'Shopee',
     period: 'May 2024 - Aug 2024',
+    team: 'SPX Regional Operations',
     description: 'Wrote high-performance SQL scripts, wrote and analysed performance metrics to drive business insights and executed strategic initiatives',
     logo: 'shopee-logo.png',
     skills: ['Python', 'Excel', 'Spark', 'Trino']
@@ -272,6 +310,7 @@ const projects = [
 // To add a logo for each skill to then map 
 const skills = [
   { name: 'JavaScript', logo: 'javascript-logo.png' },
+  { name: 'Springboot', logo: 'springboot-logo.png'},
   // { name: 'TypeScript', logo: 'typescript-logo.png' },
   { name: 'Vue.js', logo: 'vue-logo.png' },
   // { name: 'React', logo: 'react-logo.png' },
