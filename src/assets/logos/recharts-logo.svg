@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="recharts-a" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#00C6FB" />
+      <stop offset="100%" stop-color="#005BEA" />
+    </linearGradient>
+  </defs>
+  <circle cx="128" cy="128" r="120" fill="#0F172A" />
+  <path d="M128 48v160c-44.183 0-80-35.817-80-80s35.817-80 80-80z" fill="url(#recharts-a)" />
+  <path d="M128 48c44.183 0 80 35.817 80 80 0 22.091-8.954 42.091-23.474 56.627L128 128V48z" fill="#34D399" />
+  <circle cx="128" cy="128" r="22" fill="#F8FAFC" />
+</svg>
